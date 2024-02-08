@@ -1,4 +1,5 @@
 variable "enable_assume_role" {
+  description = "The boolean variable whether to enable assume role or not."
   type    = bool
   default = false
 }
@@ -14,6 +15,7 @@ variable "region" {
 }
 
 variable "vpc_peerings" {
+  description = "VPC peerings values. Previous ID would be added in the tag."
   type = map(object({
     name = string
     requester = object({

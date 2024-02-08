@@ -1,6 +1,7 @@
 variable "enable_assume_role" {
   type    = bool
   default = false
+  description = "The boolean variable whether to enable assume role or not."
 }
 variable "role_arn" {
   type        = string
@@ -17,6 +18,8 @@ variable "vpc" {
     assign_generated_ipv6_cidr_block = bool
   })
   default = null
+  description = "VPC values. Previous ID would be added in the tag."
+
 }
 
 variable "ipv4_cidr_block_associations" {
@@ -24,6 +27,7 @@ variable "ipv4_cidr_block_associations" {
     cidr_block = string
   }))
   default = null
+  description = "ipv4_cidr_block_associations values."
 }
 
 variable "subnets" {
@@ -34,6 +38,7 @@ variable "subnets" {
     tags              = map(string)
   }))
   default = null
+  description = "Subnet values. Previous ID would be added in the tag."
 }
 
 variable "transit_gateway_vpc_attachments" {
@@ -44,6 +49,7 @@ variable "transit_gateway_vpc_attachments" {
     tags                    = map(string)
   }))
   default = null
+  description = "transit_gateway_vpc_attachments values."
 }
 
 variable "vpn_gateways" {
@@ -54,12 +60,15 @@ variable "vpn_gateways" {
     tags              = map(string)
   }))
   default = null
+  description = "vpn_gateways values. Previous ID would be added in the tag."  
 }
+
 variable "internet_gateways" {
   type = map(object({
     tags = map(string)
   }))
   default = null
+  description = "internet_gateways values. Previous ID would be added in the tag."  
 }
 
 variable "nat_gateways" {
@@ -71,6 +80,7 @@ variable "nat_gateways" {
     tags               = map(string)
   }))
   default = null
+  description = "nat_gateways values. Previous ID would be added in the tag."  
 }
 
 variable "eips" {
@@ -81,6 +91,7 @@ variable "eips" {
     tags                 = map(string)
   }))
   default = null
+  description = "eips values. Previous ID would be added in the tag."  
 }
 
 variable "network_acls" {
@@ -111,6 +122,7 @@ variable "network_acls" {
     tags = map(string)
   }))
   default = null
+  description = "network_acls values. Previous ID would be added in the tag."  
 }
 
 variable "security_groups" {
@@ -122,6 +134,7 @@ variable "security_groups" {
     tags = map(string)
   }))
   default = null
+  description = "security_groups values. Previous ID would be added in the tag."  
 }
 
 variable "security_group_rules" {
@@ -139,6 +152,7 @@ variable "security_group_rules" {
     security_groups   = list(string)
   }))
   default = {}
+  description = "security_group_rules values."  
 }
 
 variable "route_tables" {
@@ -147,6 +161,7 @@ variable "route_tables" {
     name = string
   }))
   default = {}
+  description = "route_tables values. Previous ID would be added in the tag."  
 }
 
 variable "routes" {
@@ -169,6 +184,7 @@ variable "routes" {
     # vpc_peering_connection_id = string
   }))
   default = {}
+  description = "route values of route table. VPC Peering Connection related routes are created later."  
 }
 
 variable "main_route_table_associations" {
@@ -177,6 +193,8 @@ variable "main_route_table_associations" {
     id                  = string
   }))
   default = {}
+  description = "Main route table association values. This association is for designating the main route table of VPC"  
+
 }
 
 variable "route_table_associations" {
@@ -186,6 +204,8 @@ variable "route_table_associations" {
     prev_subnet_id      = string
   }))
   default = {}
+  description = "Route table association values. This association is for mapping with subnets."  
+
 }
 
 variable "vpc_endpoints" {

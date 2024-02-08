@@ -89,15 +89,15 @@ locals {
 ## input2: { subnet_name1 : oldID1 }
 ## output2: { subnet_name1 : newID1 }
 
-module "connection_nat_gateway" {
-  source = "../../modules/relations/connection_nat_gateway"
+module "legacy_nat_gateway" {
+  source = "../../modules/relations/legacy_nat_gateway"
 
   subnets = merge(module.subnet)
   nat_set = local.nat_set
 }
 
-module "connection_eip" {
-  source = "../../modules/relations/connection_eip"
+module "legacy_eip" {
+  source = "../../modules/relations/legacy_eip"
 
   eips    = merge(module.eip)
   eip_set = local.eip_set

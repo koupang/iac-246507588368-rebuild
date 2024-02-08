@@ -97,8 +97,8 @@ module "nat_gateway" {
 
   for_each          = var.nat_gateways != null ? var.nat_gateways : {}
   connectivity_type = each.value.connectivity_type
-  allocation_id     = each.value.connectivity_type == "public" ? module.connection_eip.eip_new_set[each.key] : null
-  subnet_id         = module.connection_nat_gateway.nat_new_set[each.key]
+  allocation_id     = each.value.connectivity_type == "public" ? module.legacy_eip.eip_new_set[each.key] : null
+  subnet_id         = module.legacy_nat_gateway.nat_new_set[each.key]
   tags              = each.value.tags
 }
 

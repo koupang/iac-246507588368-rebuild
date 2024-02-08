@@ -1,7 +1,9 @@
 variable "enable_assume_role" {
   type    = bool
   default = false
+  description = "The boolean variable whether to enable assume role or not."
 }
+
 variable "role_arn" {
   type        = string
   default     = ""
@@ -10,6 +12,7 @@ variable "role_arn" {
 variable "region" {
   type    = string
   default = "ap-northeast-2"
+  description = "Region for resources to be provisioned."
 }
 
 variable "transit_gateways" {
@@ -18,8 +21,9 @@ variable "transit_gateways" {
     description = string
     tags        = map(string)
   }))
-  default = {}
+  description = "Transit Gateway values. Previous ID would be added in the tag."
 }
+
 variable "managed_prefix_lists" {
   type = map(object({
     address_family = string
@@ -31,7 +35,7 @@ variable "managed_prefix_lists" {
     name        = string
     tags        = map(string)
   }))
-  default = {}
+  description = "Managed prefix list values. Previous ID would be added in the tag."
 }
 
 variable "s3_buckets_for_vpc_flow_logs" {
@@ -43,4 +47,5 @@ variable "s3_buckets_for_vpc_flow_logs" {
   }))
 
   default = {}
+  description = "Values for S3 bucket storing VPC flow logs."
 }
