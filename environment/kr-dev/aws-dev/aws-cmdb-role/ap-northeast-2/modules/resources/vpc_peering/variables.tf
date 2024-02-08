@@ -17,9 +17,3 @@ variable "accepter" {
     tags   = map(string)
   })
 }
-
-variable "test" {
-  type        = string
-  description = "(optional) describe your variable"
-  default     = ""
-}
