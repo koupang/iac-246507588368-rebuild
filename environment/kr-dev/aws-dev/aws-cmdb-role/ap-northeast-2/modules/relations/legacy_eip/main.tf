@@ -1,24 +1,25 @@
 locals {
-  eips_with_prev_id = [for e in var.eips : e if contains(keys(e.eip.tags), "PrevId")]
-  eip_id_mapping = { for e in local.eips_with_prev_id : e.eip.tags.PrevId => e.eip.id }
+  //filtering the EIPs which has prevId in tags. These resources indicate the newly created resource based on imported terraform state file.
+  //eip_mapping = {eip-old1 = "eip-new1"}
+  eip_mapping = { 
+    for e in var.eips : e.eip.tags.PrevId => e.eip.id
+    if contains(keys(e.eip.tags), "PrevId")
+  }
 
-  eip_new_set = {
-    for e, allocation_id in var.eip_set : e => lookup(local.eip_id_mapping, allocation_id, allocation_id)
+  //change old EIP ID to new EIP ID
+  new_eips = {
+    for e, allocation_id in var.eips_with_legacy_relations : e => lookup(local.eip_mapping, allocation_id, allocation_id)
   }
 }
 
-output "eips_with_prev_id" {
-  value = local.eips_with_prev_id
+output "eip_mapping" {
+  value = local.eip_mapping
 }
 
-output "eip_id_mapping" {
-  value = local.eip_id_mapping
+output "eips_with_legacy_relations" {
+  value = var.eips_with_legacy_relations
 }
 
-output "eip_set" {
-  value = var.eip_set
-}
-
-output "eip_new_set" {
-  value = local.eip_new_set
+output "new_eips" {
+  value = local.new_eips
 }

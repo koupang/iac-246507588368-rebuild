@@ -4,11 +4,11 @@ locals {
     for tgw_attachment_name, attachment in coalesce(var.transit_gateway_vpc_attachments, {}) : tgw_attachment_name => attachment.prev_subnet_ids
   }
 
-  nat_set = {
+  nat_subnets_with_legacy_relations = {
     for nat_gateway_name, attributes in coalesce(var.nat_gateways, {}) : nat_gateway_name => attributes.prev_subnet_id
   }
 
-  eip_set = {
+  eips_with_legacy_relations = {
     for nat_gateway_name, attributes in coalesce(var.nat_gateways, {}) : nat_gateway_name => attributes.prev_allocation_id
   }
 
@@ -93,14 +93,14 @@ module "legacy_nat_gateway" {
   source = "../../modules/relations/legacy_nat_gateway"
 
   subnets = merge(module.subnet)
-  nat_set = local.nat_set
+  nat_subnets_with_legacy_relations = local.nat_subnets_with_legacy_relations
 }
 
 module "legacy_eip" {
   source = "../../modules/relations/legacy_eip"
 
   eips    = merge(module.eip)
-  eip_set = local.eip_set
+  eips_with_legacy_relations = local.eips_with_legacy_relations
 }
 
 module "legacy_nacl" {

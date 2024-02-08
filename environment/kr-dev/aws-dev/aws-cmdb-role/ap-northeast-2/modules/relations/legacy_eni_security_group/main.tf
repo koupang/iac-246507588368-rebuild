@@ -6,6 +6,7 @@ locals {
     if contains(keys(sg.security_group.tags), "PrevId")
   }
 
+  //Change the security group IDs from old IDs to newly created IDs
   new_security_groups = {
     for security_group, security_group_ids in var.eni_sg_with_legacy_relations :
     security_group => [ for security_group_id in security_group_ids : lookup(local.sg_mapping, security_group_id, security_group_id)]

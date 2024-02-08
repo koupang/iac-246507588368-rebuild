@@ -1,4 +1,5 @@
-variable "eip_set" {
+variable "eips_with_legacy_relations" {
+  description = "Set of old EIPs"
   type    = map(string)
 }
 

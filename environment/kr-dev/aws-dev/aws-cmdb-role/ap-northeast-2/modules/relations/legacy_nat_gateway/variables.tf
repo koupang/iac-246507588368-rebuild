@@ -1,4 +1,4 @@
-variable "nat_set" {
+variable "nat_subnets_with_legacy_relations" {
   type    = map(string)
 }
 
